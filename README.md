@@ -88,3 +88,23 @@ Resule in GraphQL Explorer
   }
 }
 ```
+
+##### If you want to request same field in both organization,without duplication
+
+We use **fragment** to extract the query reuse part
+
+```GraphQL
+{
+  book: organization(login: "to-read-to-learn-react") {
+    ...shareOrganizationFileds
+  },
+  company:organization(login: "airbnb"){
+    ...shareOrganizationFileds
+  }
+}
+
+fragment shareOrganizationFileds on Organization{
+  name
+  url
+}
+```

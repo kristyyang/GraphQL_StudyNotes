@@ -108,3 +108,59 @@ fragment shareOrganizationFileds on Organization{
   url
 }
 ```
+
+### GraphQL Operation: Mutation
+
+- Shard same principle with mutation:
+    - It has field and object, arguements and variables, fragment and operation names
+    - Directives and nested object for returned result
+
+```GraphQL
+query {
+  organization(login: "the-road-to-learn-react") {
+    name
+    url
+    repository(name: "the-road-to-learn-react") {
+      id
+      name
+      }
+    }
+}
+
+```
+
+####Before using the identifier as a variable, you can structure your mutation in GraphiQL the following
+
+```GraphQL
+mutation AddStar($repositoryId: ID!) {
+  addStar(input: { starrableId: $repositoryId }) {
+    starrable {
+      id
+      viewerHasStarred
+      }
+      }
+}
+```
+
+And in Query variable
+
+```GraphQL
+{
+"repositoryId": "MDEwOlJlcG9zaXRvcnk2MzM1MjkwNw=="
+}
+```
+
+GitHub GraphQL Explorer
+
+```GraphQL
+{
+"data": {
+  "addStar": {
+    "starrable": {
+      "id": "MDEwOlJlcG9zaXRvcnk2MzM1MjkwNw==",
+      "viewerHasStarred": true
+      }
+    }
+  }
+}
+```

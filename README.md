@@ -164,3 +164,27 @@ GitHub GraphQL Explorer
   }
 }
 ```
+
+## GraphQL Pagination
+
+It could take ages to fetch a list of repositories from a large organization.
+In GraphQL, you can request paginated data by providing arguments to a list field.
+
+
+**GitHub GraphQL Explorer**
+```GraphQL
+query OrganizationForLearningReact {
+  organization(login: "the-road-to-learn-react") {
+    name
+    url
+    repositories(first: 2) {
+      edges {
+        node {
+          name
+        }
+      }
+    }
+  }
+}
+
+```
